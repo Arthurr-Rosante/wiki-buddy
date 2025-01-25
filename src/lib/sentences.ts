@@ -1,0 +1,16 @@
+export const sentences = [
+  "Baking your answers",
+  "Searching the wiki",
+  "Thinking about it",
+  "Brewing some wisdom",
+  "Processing the thoughts",
+  "Gathering the facts",
+  "Crunching the numbers",
+  "Stirring the ideas",
+  "Crafting your response",
+  "Digging into the depths",
+  "Diving into the data",
+  "Tuning the response",
+  "Preparing your insights",
+  "Formulating the perfect answer",
+];
