@@ -29,6 +29,7 @@ export default function Home() {
       const data: TextRazorAPIResponse = await res.json();
 
       setResponse(data.response);
+      console.log(data.response);
     } catch (error) {
       console.error(error);
     } finally {
@@ -41,9 +42,12 @@ export default function Home() {
     <main className="flex flex-col gap-y-5 items-center justify-center min-h-screen relative max-w-5xl mx-auto">
       <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-auto flex flex-col space-y-6 z-10">
         <h1 className="text-center text-4xl font-bold">
-          Don't know Something? Just ask your{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-            Buddy Wiki
+          Want to search for a Topic? <br />
+          <span className="text-4xl">
+            Leave it to{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient">
+              Wiki Buddy
+            </span>
           </span>
         </h1>
         <Form submitHandler={handleSubmit} />

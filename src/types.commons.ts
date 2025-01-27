@@ -1,4 +1,4 @@
-interface Topic {
+export interface Topic {
   id: number;
   label: string;
   score: number;
@@ -7,7 +7,7 @@ interface Topic {
 }
 type CoarseTopic = Omit<Topic, "wikidataId">;
 
-interface Entity {
+export interface Entity {
   confidenceScore: number;
   endingPos: number;
   entityEnglishId: string;
@@ -34,4 +34,15 @@ export interface TextRazorAPIResponse {
   ok: boolean;
   response: ResponseObject;
   time: number;
+}
+
+interface Section {
+  title: string;
+  content: string;
+}
+
+export interface WikipediaPageData {
+  title: string;
+  sections: Section[];
+  imageUrl: string | null;
 }
