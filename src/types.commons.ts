@@ -36,13 +36,19 @@ export interface TextRazorAPIResponse {
   time: number;
 }
 
-interface Section {
+export interface WikiSection {
+  line: string;
+  index: string;
+}
+
+export interface Section {
   title: string;
   content: string;
+  index: string;
 }
 
 export interface WikipediaPageData {
   title: string;
   sections: Section[];
-  imageUrl: string | null;
+  imageUrl?: string | null;
 }

@@ -19,7 +19,7 @@ export function Feed({ buddyResponse }: FeedProps) {
         const response = await axios.get(
           `/api/wikipedia?pageTitle=${pageTitle}`
         );
-        // console.log(response.data);
+        console.log(response.data);
         setContent(response.data);
       } catch (error) {
         console.error(error);

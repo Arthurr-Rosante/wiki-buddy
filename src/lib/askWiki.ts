@@ -1,4 +1,4 @@
-import { WikipediaPageData } from "@/types.commons";
+import { Section, WikipediaPageData, WikiSection } from "@/types.commons";
 import axios from "axios";
 
 export const askWiki = async (
@@ -23,45 +23,13 @@ export const askWiki = async (
       return null;
     }
 
-    const sections = pageData.sections.map((section: any) => ({
+    const sections = pageData.sections.map((section: WikiSection) => ({
       title: section.line,
       index: section.index,
     }));
 
-    const imageResponse = await axios.get(endpoint, {
-      params: {
-        action: "query",
-        titles: searchTerm,
-        prop: "images",
-        format: "json",
-        formatversion: "2",
-        origin: "*",
-      },
-    });
-
-    const page = imageResponse.data.query.pages[0];
-    const images = page?.images || [];
-    const imageTitle = images.length > 0 ? images[0].title : null;
-    let imageUrl: string | null = null;
-
-    if (imageTitle) {
-      const imageInfoResponse = await axios.get(endpoint, {
-        params: {
-          action: "query",
-          titles: imageTitle,
-          prop: "imageinfo",
-          iiprop: "url",
-          format: "json",
-          formatversion: "2",
-          origin: "*",
-        },
-      });
-      const imageData = imageInfoResponse.data.query.pages[0];
-      imageUrl = imageData?.imageinfo?.[0]?.url || null;
-    }
-
     const fullContent = pageData.text["*"];
-    const sectionContents = sections.map((section: any) => {
+    const sectionContents = sections.map((section: Section) => {
       const regex = new RegExp(
         `<h[1-6][^>]*>${section.title}</h[1-6]>((.|\\n)*?)(<h[1-6]|$)`,
         "i"
@@ -76,7 +44,6 @@ export const askWiki = async (
     return {
       title: pageData.title,
       sections: sectionContents,
-      imageUrl,
     };
   } catch (error) {
     console.error("Error fetching Wikipedia page data:", error);
