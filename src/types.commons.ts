@@ -50,5 +50,9 @@ export interface Section {
 export interface WikipediaPageData {
   title: string;
   sections: Section[];
-  imageUrl?: string | null;
+}
+
+export interface FullResponse {
+  txtRazorData: TextRazorAPIResponse;
+  wikiData: WikipediaPageData;
 }

@@ -3,11 +3,17 @@
 import { Form } from "@/components/Form";
 import { Feed } from "@/components/Feed";
 import { Dispatch, SetStateAction, useState } from "react";
-import { ResponseObject, TextRazorAPIResponse } from "@/types.commons";
+import {
+  FullResponse,
+  ResponseObject,
+  TextRazorAPIResponse,
+  WikipediaPageData,
+} from "@/types.commons";
 import { Loading } from "@/components/Loading";
+import axios from "axios";
 
 export default function Home() {
-  const [response, setResponse] = useState<ResponseObject | null>(null);
+  const [response, setResponse] = useState<FullResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (
@@ -19,17 +25,33 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/textrazor", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: prompt }),
-      });
-      const data: TextRazorAPIResponse = await res.json();
+      const txtRazorResponse = await axios.post(
+        "/api/textrazor",
+        { text: prompt },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const txtRazorData: TextRazorAPIResponse = txtRazorResponse.data;
 
-      setResponse(data.response);
-      console.log(data.response);
+      let pageTitle = txtRazorData.response.entities[0].entityId;
+      // if(txtRazorData.response) {
+      //logic to fetch next topic if first doesn't have wikilink;
+      // }
+
+      const wikiResponse = await axios.get(
+        `/api/wikipedia?pageTitle=${pageTitle}`
+      );
+      const wikiData: WikipediaPageData = wikiResponse.data;
+
+      const response = {
+        wikiData,
+        txtRazorData,
+      };
+
+      setResponse(response);
     } catch (error) {
       console.error(error);
     } finally {
