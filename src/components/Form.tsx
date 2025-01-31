@@ -3,7 +3,6 @@
 import { Textarea } from "./Textarea";
 import { Button } from "./Button";
 import { Dispatch, SetStateAction, useState } from "react";
-import axios from "axios";
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   submitHandler: (
@@ -16,6 +15,7 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 export function Form({ submitHandler }: FormProps) {
   const [prompt, setPrompt] = useState("");
 
+  
   return (
     <form
       onSubmit={(e) => submitHandler(e, prompt, setPrompt)}

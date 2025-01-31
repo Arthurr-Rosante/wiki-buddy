@@ -1,3 +1,5 @@
+// TextRazor Types =============================================================
+
 export interface Topic {
   id: number;
   label: string;
@@ -16,10 +18,10 @@ export interface Entity {
   id: number;
   matchedText: string;
   matchingTokens: number[];
-  relevanceSore: number;
+  relevanceScore: number;
   startingPos: number;
   type: string[];
-  wikiLink: string;
+  wikiLink?: string;
 }
 
 export interface ResponseObject {
@@ -36,23 +38,24 @@ export interface TextRazorAPIResponse {
   time: number;
 }
 
-export interface WikiSection {
-  line: string;
-  index: string;
+export interface AskTxtRazorResponse {
+  data: TextRazorAPIResponse;
+  entities: Entity[];
+  topics: Topic[] | undefined;
 }
 
-export interface Section {
-  title: string;
-  content: string;
-  index: string;
+// Wikipedia Types =============================================================
+interface Section {
+  anchor: string;
+  fromtitle: string;
+  index: string | number;
+  level: string | number;
+  number: string | number;
 }
 
-export interface WikipediaPageData {
+export interface WikipediaAPIResponse {
   title: string;
+  pageid: number;
+  text: string;
   sections: Section[];
-}
-
-export interface FullResponse {
-  txtRazorData: TextRazorAPIResponse;
-  wikiData: WikipediaPageData;
 }

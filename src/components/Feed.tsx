@@ -5,11 +5,11 @@ import { FullResponse } from "@/types.commons";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 
-interface FeedProps {
-  buddyResponse: FullResponse | null;
-}
+// interface FeedProps {
+//   buddyResponse: FullResponse | null;
+// }
 
-export function Feed({ buddyResponse }: FeedProps) {
+export function Feed({ buddyResponse }: any) {
   if (!buddyResponse) return null;
 
   return (
