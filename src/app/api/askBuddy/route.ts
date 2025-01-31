@@ -9,7 +9,9 @@ export const POST = async (req: Request) => {
 
     const wikiData = await askWiki(mostRelevantEntity);
 
-    return new Response(JSON.stringify(wikiData), { status: 200 });
+    return new Response(JSON.stringify(textRazor), {
+      status: 200,
+    });
   } catch (error) {
     console.error("Error making request to TextRazor:", error);
     return new Response(

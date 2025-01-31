@@ -1,11 +1,10 @@
 import {
   AskTxtRazorResponse,
-  Entity,
   ResponseObject,
   TextRazorAPIResponse,
 } from "@/types.commons";
+import validateEntities from "@/utils/validateEntities";
 import axios from "axios";
-import { validateEntities } from "./validateEntities";
 
 const apiUrl = process.env.API_URL as string;
 const apiKey = process.env.API_KEY as string;
@@ -22,7 +21,7 @@ export const askTxtRazor = async (text: string) => {
       },
       data: new URLSearchParams({
         text,
-        extractors: "entities,topics,relations,senses",
+        extractors: "entities,topics",
       }).toString(),
     });
 
@@ -30,15 +29,14 @@ export const askTxtRazor = async (text: string) => {
     const entitiesList: ResponseObject["entities"] = data.response.entities;
     const topicsList: ResponseObject["topics"] = data.response.topics;
 
-    // only the most related entities | the first 25 matching topics
-    const validEntities = validateEntities(entitiesList)
+    const validEntities = validateEntities(entitiesList);
     const validTopics = topicsList
       ?.filter((topic) => topic.id < 25)
       .filter((topic) => !topic.wikiLink.includes("/Category:"));
 
     return {
       data,
-      entities: validEntities,
+      entities: entitiesList.length > 5 ? validEntities : entitiesList, //check here
       topics: validTopics,
     } as AskTxtRazorResponse;
   } catch (error) {

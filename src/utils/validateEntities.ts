@@ -5,7 +5,7 @@ const threshold = 8.0;
 const weightRelevance = 0.9;
 const weightConfidence = 0.1;
 
-export function validateEntities(entityList: Entity[]) {
+export default function validateEntities(entityList: Entity[]) {
   const validEntities = entityList
     .filter((entity) => entity.confidenceScore >= threshold)
     .map((entity) => ({

@@ -46,6 +46,7 @@ export interface AskTxtRazorResponse {
 
 // Wikipedia Types =============================================================
 interface Section {
+  line?: string;
   anchor: string;
   fromtitle: string;
   index: string | number;
@@ -56,6 +57,9 @@ interface Section {
 export interface WikipediaAPIResponse {
   title: string;
   pageid: number;
-  text: string;
+  text: {
+    ["*"]: string;
+  };
+  images: string[];
   sections: Section[];
 }
