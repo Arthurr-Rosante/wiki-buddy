@@ -1,13 +1,20 @@
 import { Entity, ResponseObject } from "@/types.commons";
 
-const threshold = 8.0;
-
 const weightRelevance = 0.9;
 const weightConfidence = 0.1;
 
 export default function validateEntities(entityList: Entity[]) {
+  const threshold =
+    entityList.reduce((acc, entity) => acc + entity.confidenceScore, 0) /
+    entityList.length;
+
+  console.log(threshold);
+
   const validEntities = entityList
-    .filter((entity) => entity.confidenceScore >= threshold)
+    .filter(
+      (entity) =>
+        entity.confidenceScore >= threshold && entity.relevanceScore !== 0
+    )
     .map((entity) => ({
       ...entity,
       combinedScore:

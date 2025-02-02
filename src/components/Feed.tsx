@@ -17,9 +17,9 @@ export function Feed({ buddyResponse }: FeedProps) {
         <h1 className="text-5xl text-left font-bold">° {wikiData.title}</h1>
         <p className="ml-4 p-4 text-justify">{wikiData.extract}</p>
       </section>
-      {textRazor.response.topics && (
+      {/* {textRazor.response.topics && (
         <Sidebar content={textRazor.response.topics} />
-      )}
+      )} */}
     </>
   );
 }
