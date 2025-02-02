@@ -1,19 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { FullResponse } from "@/types.commons";
-import axios from "axios";
 import Sidebar from "./Sidebar";
+interface FeedProps {
+  buddyResponse: FullResponse | null;
+}
 
-// interface FeedProps {
-//   buddyResponse: FullResponse | null;
-// }
-
-export function Feed({ buddyResponse }: any) {
+export function Feed({ buddyResponse }: FeedProps) {
   if (!buddyResponse) return null;
 
+  const { textRazor, wikiData } = buddyResponse;
+
   return (
-    <section className="w-3/4 p-4 mt-4 flex flex-col items-center"></section>
+    <>
+      <section className="w-3/4 p-4 mt-4 flex flex-col bg-white/40 rounded-2xl shadow-lg backdrop-blur-sm">
+        <h1 className="text-5xl text-left font-bold">° {wikiData.title}</h1>
+        <p className="ml-4 p-4 text-justify">{wikiData.extract}</p>
+      </section>
+      {textRazor.response.topics && (
+        <Sidebar content={textRazor.response.topics} />
+      )}
+    </>
   );
 }
 

@@ -56,10 +56,16 @@ interface Section {
 
 export interface WikipediaAPIResponse {
   title: string;
-  pageid: number;
-  text: {
-    ["*"]: string;
-  };
-  images: string[];
-  sections: Section[];
+  extract: string;
+  // pageid: number;
+  // text: {
+  //   ["*"]: string;
+  // };
+  // images: string[];
+  // sections: Section[];
+}
+
+export interface FullResponse {
+  textRazor: TextRazorAPIResponse;
+  wikiData: WikipediaAPIResponse;
 }

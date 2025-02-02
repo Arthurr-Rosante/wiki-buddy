@@ -9,7 +9,7 @@ export const POST = async (req: Request) => {
 
     const wikiData = await askWiki(mostRelevantEntity);
 
-    return new Response(JSON.stringify(textRazor), {
+    return new Response(JSON.stringify({ textRazor, wikiData }), {
       status: 200,
     });
   } catch (error) {

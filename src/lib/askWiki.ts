@@ -1,5 +1,4 @@
 import { WikipediaAPIResponse } from "@/types.commons";
-import cleanHtmlContent from "@/utils/cleanHtml";
 import axios from "axios";
 
 export const askWiki = async (searchTerm: string) => {
@@ -30,7 +29,7 @@ export const askWiki = async (searchTerm: string) => {
     return {
       title,
       extract,
-    };
+    } as WikipediaAPIResponse;
   } catch (error) {
     console.error("Error fetching Wikipedia page data:", error as Error);
     return null;
