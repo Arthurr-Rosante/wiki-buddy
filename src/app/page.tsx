@@ -53,7 +53,7 @@ export default function Home() {
       }
 
       setResponse(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
