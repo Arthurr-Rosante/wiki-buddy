@@ -1,5 +1,5 @@
 "use client";
-import { sentences } from "@/lib/sentences";
+import { sentences } from "@/utils/sentences";
 import { useEffect, useState } from "react";
 
 export const Loading = () => {

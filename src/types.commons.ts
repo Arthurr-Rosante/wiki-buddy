@@ -57,12 +57,6 @@ interface Section {
 export interface WikipediaAPIResponse {
   title: string;
   extract: string;
-  // pageid: number;
-  // text: {
-  //   ["*"]: string;
-  // };
-  // images: string[];
-  // sections: Section[];
 }
 
 export interface FullResponse {

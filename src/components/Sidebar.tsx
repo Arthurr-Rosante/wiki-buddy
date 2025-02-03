@@ -39,6 +39,7 @@ function Sidebar({ topics }: SidebarProps) {
             key={topic.id}
             onClick={() => {
               handleCopy(topic.label);
+              setIsOpen(false);
             }}
           >
             <span className="flex items-center justify-between pr-2">
