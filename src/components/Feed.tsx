@@ -13,35 +13,16 @@ export function Feed({ buddyResponse }: FeedProps) {
 
   return (
     <>
-      <section className="w-3/4 p-4 mt-4 flex flex-col bg-white/40 rounded-2xl shadow-lg backdrop-blur-sm">
-        <h1 className="text-5xl text-left font-bold">° {wikiData.title}</h1>
-        <p className="ml-4 p-4 text-justify">{wikiData.extract}</p>
+      <section className="w-full sm:w-3/4 p-4 mt-4 flex flex-col bg-white/40 rounded-2xl shadow-lg backdrop-blur-sm min-h-screen sm:min-h-0 mx-0 sm:mx-auto">
+        <h1 className="text-4xl sm:text-5xl text-left font-bold">
+          ° {wikiData.title}
+        </h1>
+        <p className="ml-0 sm:ml-4 p-4 text-justify">{wikiData.extract}</p>
       </section>
-      {/* {textRazor.response.topics && (
-        <Sidebar content={textRazor.response.topics} />
-      )} */}
+
+      {textRazor.topics && textRazor.topics.length > 0 && (
+        <Sidebar topics={textRazor.topics} />
+      )}
     </>
   );
 }
-
-// const [response, setResponse] = useState<ResponseObject | null>(null);
-// const [content, setContent] = useState(null);
-
-// useEffect(() => {
-//   const fetchWikipedia = async (pageTitle: string) => {
-//     try {
-//       const response = await axios.get(
-//         `/api/wikipedia?pageTitle=${pageTitle}`
-//       );
-//       console.log(response.data);
-//       setContent(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   if (buddyResponse) {
-//     setResponse(buddyResponse);
-//     fetchWikipedia(buddyResponse.entities[0].entityId);
-//   }
-// }, [buddyResponse]);

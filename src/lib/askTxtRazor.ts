@@ -28,11 +28,20 @@ export const askTxtRazor = async (text: string) => {
     const data: TextRazorAPIResponse = response.data;
     const entitiesList: ResponseObject["entities"] = data.response.entities;
     const topicsList: ResponseObject["topics"] = data.response.topics;
+    data.response.language =
+      data.response.language === "eng"
+        ? "en"
+        : data.response.language === "por"
+        ? "pt"
+        : data.response.language;
 
     const validEntities = validateEntities(entitiesList);
     const validTopics = topicsList
-      ?.filter((topic) => topic.id < 25)
-      .filter((topic) => !topic.wikiLink.includes("/Category:"));
+      ?.filter((topic) => !topic.wikiLink.includes("/Category:"))
+      .map((topic) => ({
+        ...topic,
+        wikiLink: `https://en.wikipedia.org/wiki/${topic.label}`,
+      }));
 
     return {
       data,

@@ -5,9 +5,10 @@ import { Feed } from "@/components/Feed";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Loading } from "@/components/Loading";
 import axios from "axios";
+import { FullResponse } from "@/types.commons";
 
 export default function Home() {
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState<FullResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (
@@ -39,13 +40,13 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col gap-y-5 items-center justify-center min-h-screen relative max-w-5xl mx-auto">
+    <main className="flex flex-col gap-y-5 items-center justify-start min-h-screen h-auto max-w-5xl mx-auto p-6">
       <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-auto flex flex-col space-y-6 z-10">
-        <h1 className="text-center text-4xl font-bold">
-          Want to search for a Topic? <br />
+        <h1 className="text-center text-4xl">
+          To Summarize & Simplify{" "}
           <span className="text-4xl">
-            Leave it to{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient">
+            your researchs: <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient font-bold">
               Wiki Buddy
             </span>
           </span>

@@ -1,8 +1,8 @@
 import { WikipediaAPIResponse } from "@/types.commons";
 import axios from "axios";
 
-export const askWiki = async (searchTerm: string) => {
-  const endpoint = "https://pt.wikipedia.org/w/api.php";
+export const askWiki = async (searchTerm: string, language: string) => {
+  const endpoint = `https://${language}.wikipedia.org/w/api.php`;
 
   try {
     const response = await axios.get(endpoint, {
@@ -29,6 +29,7 @@ export const askWiki = async (searchTerm: string) => {
     return {
       title,
       extract,
+      pageData,
     } as WikipediaAPIResponse;
   } catch (error) {
     console.error("Error fetching Wikipedia page data:", error as Error);

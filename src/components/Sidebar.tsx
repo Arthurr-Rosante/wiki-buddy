@@ -1,39 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { Topic } from "@/types.commons";
+import { use, useState } from "react";
 
-function Sidebar() {
+interface SidebarProps {
+  topics: Topic[];
+}
+
+function Sidebar({ topics }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="fixed top-0 right-0 z-50 w-1/4">
+    <div>
+      {/* Botão de abrir */}
       <button
-        className="fixed top-4 right-4 z-50 bg-red-500 text-white p-2 rounded-full shadow-md lg:hidden"
         onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-5 right-5 z-50 p-2 bg-gray-800 text-white rounded-full shadow-lg"
       >
         {isOpen ? "Close" : "Related Topics"}
       </button>
 
+      {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full bg-red-500 w-64 transform transition-transform duration-300 z-40 flex flex-col p-4 shadow-lg ${
+        className={`overflow-y-auto fixed top-0 right-0 h-full w-64 sm:w-72 bg-white shadow-lg transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } lg:translate-x-0 lg:static lg:w-1/4`}
+        } transition-transform duration-300 ease-in-out z-40 p-4 border-l`}
       >
-        <h1 className="text-white text-xl font-bold mb-4">Related Topics</h1>
-        <ul className="space-y-2">
-          <li className="text-white">Topic 1</li>
-          <li className="text-white">Topic 2</li>
-          <li className="text-white">Topic 3</li>
-          <li className="text-white">Topic 4</li>
-        </ul>
+        <h1 className="text-xl font-bold mb-4">Related Topics</h1>
+        {topics.map((topic) => (
+          <a
+            target="_blank"
+            href={topic.wikiLink}
+            className="block border-b p-2 hover:bg-gray-100 transition"
+            key={topic.id}
+          >
+            {topic.label}
+          </a>
+        ))}
       </div>
-
-      {/* Overlay em telas pequenas */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-          onClick={() => setIsOpen(false)}
-        ></div>
-      )}
     </div>
   );
 }

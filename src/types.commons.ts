@@ -41,7 +41,7 @@ export interface TextRazorAPIResponse {
 export interface AskTxtRazorResponse {
   data: TextRazorAPIResponse;
   entities: Entity[];
-  topics: Topic[] | undefined;
+  topics?: Topic[];
 }
 
 // Wikipedia Types =============================================================
@@ -66,6 +66,6 @@ export interface WikipediaAPIResponse {
 }
 
 export interface FullResponse {
-  textRazor: TextRazorAPIResponse;
+  textRazor: AskTxtRazorResponse;
   wikiData: WikipediaAPIResponse;
 }

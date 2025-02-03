@@ -6,8 +6,9 @@ export const POST = async (req: Request) => {
   try {
     const textRazor = await askTxtRazor(text);
     const mostRelevantEntity = textRazor.entities[0].entityId;
+    const lang = textRazor.data.response.language;
 
-    const wikiData = await askWiki(mostRelevantEntity);
+    const wikiData = await askWiki(mostRelevantEntity, lang);
 
     return new Response(JSON.stringify({ textRazor, wikiData }), {
       status: 200,
