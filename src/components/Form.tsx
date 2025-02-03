@@ -15,7 +15,6 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 export function Form({ submitHandler }: FormProps) {
   const [prompt, setPrompt] = useState("");
 
-  
   return (
     <form
       onSubmit={(e) => submitHandler(e, prompt, setPrompt)}
