@@ -8,7 +8,7 @@ import axios from "axios";
 import { Form } from "@/components/Form";
 import { Feed } from "@/components/Feed";
 import { Loading } from "@/components/Loading";
-import Sidebar from "@/components/Sidebar";
+import { AlertDialog } from "@/components/AlertDialog";
 
 export default function Home() {
   const [response, setResponse] = useState<FullResponse | null>(null);
@@ -53,7 +53,6 @@ export default function Home() {
       }
 
       setResponse(response.data);
-      // console.log(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -97,20 +96,21 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col gap-y-5 items-center justify-center min-h-screen h-auto max-w-5xl mx-auto p-6">
-      <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-auto flex flex-col space-y-6 z-10">
-        <h1 className="text-center text-4xl">
-          To Summarize & Simplify{" "}
-          <span className="text-4xl">
-            your researchs: <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient font-bold">
-              Wiki Buddy
+      <main className="flex flex-col gap-y-5 items-center justify-center min-h-screen h-auto max-w-5xl mx-auto p-6">
+        <AlertDialog />
+        <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-auto flex flex-col space-y-6">
+          <h1 className="text-center text-4xl">
+            To Summarize & Simplify{" "}
+            <span className="text-4xl">
+              your researchs: <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient font-bold">
+                Wiki Buddy
+              </span>
             </span>
-          </span>
-        </h1>
-        <Form submitHandler={handleSubmit} />
-      </div>
-      {isLoading ? <Loading /> : <Feed buddyResponse={response} />}
-    </main>
+          </h1>
+          <Form submitHandler={handleSubmit} />
+        </div>
+        {isLoading ? <Loading /> : <Feed buddyResponse={response} />}
+      </main>
   );
 }

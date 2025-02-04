@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${opensans.className} antialiased`}>
-        <div className="absolute inset-0 bg-grid-pattern mask-gradient" />
+        <div className="absolute inset-0 bg-grid-pattern mask-gradient -z-10" />
         {children}
         <Toaster />
       </body>
