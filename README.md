@@ -75,7 +75,7 @@ pnpm dev
 
 Go to: http://localhost:3000 🚀
 
-Or check the experimental version at: (wiki-buddy.vercel.app)[https://wiki-buddy.vercel.app]
+Or check the experimental version at: [wiki-buddy.vercel.app](https://wiki-buddy.vercel.app)
 
 ### 📜 License
 
